@@ -1,0 +1,156 @@
+<D<!DOCTYPE html>
+<html>
+  <head>
+    <title>Slider</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <style>
+    	#carrousel{
+    		position: relative;
+
+    
+    	}
+    	
+    	#carrousel ul li{
+    		position: absolute;
+    		list-style: none;      		   		
+    	  }
+
+/*.controls{
+	position: relative;
+	top: 320px;
+
+}*/
+
+.prev{
+	position: relative;
+	padding: 7px;
+	border:1px solid grey;
+	top: 120px;
+}
+
+
+.next{
+
+	position: relative;
+	top: 120px;
+	margin-left: 45%;
+	padding: 7px;
+	border:1px solid grey;
+}
+    </style>
+  </head>
+
+  <body>
+
+
+  	<div id="carrousel"> 
+  		<ul>  			
+  			<li> <img src="img/clients.png" width="400px" height="300px"/></li>
+  			<li> <img src="img/assureurs.jpg" width="400px" height="300px"/></li>
+  			<li> <img src="img/banques.jpg" width="400px" height="300px"/></li>
+  			<li> <img src="img/finance.jpg" width="400px" height="300px"/></li> 			
+  		</ul>
+  	</div>
+
+
+
+
+
+
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+<script> 
+
+	$(document).ready(function(){
+  	 
+  	/* alert("jQuery est prêt !");*/
+
+  	var $carrousel = $('#carrousel');
+  	var $img = $('#carrousel img');
+  	var indexImg = $img.length - 1;
+  	var  i = 0;
+  	var  $currentImg = $img.eq(i);
+
+$img.css('display', 'none'); 
+$currentImg.css('display', 'block'); 
+
+
+/*faire apparaître les  bouton suivants et précédents*/
+$carrousel.append('<div class="controls"> <span class="prev">&#10094;</span> <span class="next">&#10095;</span> </div> ');
+
+
+
+
+
+$('.next').click(function(){
+
+
+i++;
+
+if( i<= indexImg ){ 
+
+$img.css('display', 'none');
+$currentImg = $img.eq(i);
+$currentImg.css('display','block');
+console.log("suivant");
+
+} else {
+	i = indexImg;
+}
+
+});
+
+
+
+$('.prev').click(function(){
+
+i--;
+
+if( i>= 0){ 
+
+$img.css('display', 'none');
+$currentImg = $img.eq(i);
+$currentImg.css('display', 'block');
+console.log('precedent');
+} else {
+ 	i = 0;
+
+ }
+
+});
+
+function slideImg() {
+
+	setTimeout(function(){
+
+		if(i < indexImg){
+
+			i++;
+		} else{
+			i = 0;
+		}
+
+		$img.css('display', 'none');
+		$currentImg = $img.eq(i);
+		$currentImg.css('display', 'block');
+
+		slideImg();
+
+	}, 5000)
+
+
+}
+
+slideImg();
+
+
+});
+
+
+</script>
+
+
+</body>
